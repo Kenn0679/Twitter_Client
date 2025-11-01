@@ -1,16 +1,358 @@
-# React + Vite
+# 🐦 Twitter Client - Frontend Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
 
-Currently, two official plugins are available:
+[![React](https://img.shields.io/badge/React-19.1.1-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7.1.7-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black&style=flat-square)](https://www.javascript.com/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
+**A modern React frontend client for Twitter Clone API**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [🔗 Backend API](https://github.com/Kenn0679/Twitter) • [💻 Tech Stack](#-tech-stack)
 
-## React Compiler
+</div>
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## 📖 **About This Project**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This is a **frontend demo client** for the [Twitter Clone API](https://github.com/Kenn0679/Twitter) - a comprehensive social media platform backend. Built with modern React and Vite, this client demonstrates core features including authentication, video streaming, and user interface components.
+
+### ✨ **Key Features**
+
+| 🎬 **Video Streaming**    | 🔐 **Authentication**        | 🎨 **Modern UI**    |
+| ------------------------- | ---------------------------- | ------------------- |
+| Progressive MP4 streaming | Google OAuth 2.0 integration | Responsive design   |
+| HLS adaptive streaming    | JWT token management         | Toast notifications |
+| Advanced video player     | Secure login/logout          | Smooth animations   |
+
+---
+
+## 🛠️ **Tech Stack**
+
+### **Core Technologies**
+
+- ⚛️ **React 19.1.1** - Modern UI library
+- ⚡ **Vite 7.1.7** - Fast build tool and dev server
+- 🛣️ **React Router DOM 7.9.4** - Client-side routing
+- 🎬 **@vidstack/react** - Advanced video player with HLS support
+- 🔔 **react-hot-toast** - Beautiful toast notifications
+
+### **Development Tools**
+
+- 🔍 **ESLint 9.36.0** - Code linting
+- 💅 **Prettier** - Code formatting
+- 🔄 **SWC** - Fast compilation
+
+---
+
+## 🚀 **Quick Start**
+
+### **Prerequisites**
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- The [Twitter Clone Backend API](https://github.com/Kenn0679/Twitter) running on `localhost:5000`
+
+### **Installation Steps**
+
+#### 1️⃣ **Clone and Install**
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/twitter-client.git
+cd twitter-client
+
+# Install dependencies
+npm install
+```
+
+#### 2️⃣ **Environment Setup**
+
+Create a `.env` file in the root directory:
+
+```bash
+# Copy the example file (if available)
+cp .env.example .env
+```
+
+Add the following environment variables:
+
+```env
+# Google OAuth Configuration
+VITE_GOOGLE_CLIENT_ID=your-google-client-id-here
+VITE_GOOGLE_REDIRECT_URI=http://localhost:3000/login/oauth
+```
+
+> 💡 **Note:** You need to set up Google OAuth credentials in the [Google Cloud Console](https://console.cloud.google.com/). The redirect URI must match exactly: `http://localhost:3000/login/oauth`
+
+#### 3️⃣ **Start Development Server**
+
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:3000`
+
+---
+
+## 📁 **Project Structure**
+
+```
+twitter-client/
+├── public/              # Static assets
+│   └── vite.svg
+├── src/
+│   ├── components/     # Reusable components
+│   │   ├── VideoStream.jsx      # MP4 progressive streaming
+│   │   └── HLSVideoStream.jsx   # HLS adaptive streaming
+│   ├── assets/         # Images and static files
+│   ├── App.jsx         # Main app component
+│   ├── App.css         # App styles
+│   ├── Home.jsx        # Home page component
+│   ├── Login.jsx       # OAuth callback handler
+│   ├── router.jsx      # Route configuration
+│   ├── main.jsx        # Application entry point
+│   └── index.css       # Global styles
+├── index.html          # HTML template
+├── vite.config.js      # Vite configuration
+├── package.json        # Dependencies
+└── README.md          # This file
+```
+
+---
+
+## 🎯 **Features Overview**
+
+### 🔐 **Authentication System**
+
+#### **Google OAuth 2.0 Integration**
+
+- Seamless login with Google account
+- Automatic token storage in localStorage
+- Redirect handling after authentication
+- User feedback with toast notifications
+
+**Flow:**
+
+1. User clicks "Login with Google"
+2. Redirects to Google OAuth consent screen
+3. User authorizes the application
+4. Backend processes OAuth callback
+5. Frontend receives tokens via query parameters
+6. Tokens stored in localStorage
+7. User redirected to home page
+
+### 🎬 **Video Streaming**
+
+#### **Progressive MP4 Streaming**
+
+- Standard HTML5 video player
+- Direct MP4 file playback
+- Simple, lightweight solution
+- Compatible with all modern browsers
+
+```jsx
+<VideoStream src='http://localhost:5000/static/videos-stream/video.mp4' title='My Video' width='85%' />
+```
+
+#### **HLS Adaptive Streaming**
+
+- Advanced video player powered by Vidstack
+- Adaptive bitrate streaming
+- Thumbnail preview support (VTT format)
+- Professional-grade video playback
+- Automatic quality adjustment based on bandwidth
+
+```jsx
+<HLSVideoStream
+  src='http://localhost:5000/static/videos-hls/playlist/master.m3u8'
+  title='HLS Video'
+  thumbnails='https://example.com/thumbnails.vtt'
+/>
+```
+
+---
+
+## 📡 **API Integration**
+
+This client connects to the [Twitter Clone Backend API](https://github.com/Kenn0679/Twitter) running on `localhost:5000`.
+
+### **Expected Backend Endpoints**
+
+| Endpoint                  | Method | Purpose                         |
+| ------------------------- | ------ | ------------------------------- |
+| `/users/oauth/google`     | GET    | Initiate Google OAuth           |
+| `/static/videos-stream/*` | GET    | Serve MP4 video files           |
+| `/static/videos-hls/*`    | GET    | Serve HLS manifest and segments |
+
+### **Authentication Flow**
+
+```
+Frontend (localhost:3000)
+    ↓
+[User clicks "Login with Google"]
+    ↓
+Redirects to Google OAuth
+    ↓
+Google redirects to Backend (localhost:5000/users/oauth/google)
+    ↓
+Backend processes OAuth → Redirects to Frontend
+    ↓
+Frontend (localhost:3000/login/oauth?access_token=...&refresh_token=...)
+    ↓
+Tokens stored in localStorage
+    ↓
+Redirect to Home page
+```
+
+---
+
+## 🎨 **UI Components**
+
+### **VideoStream Component**
+
+A simple HTML5 video player for progressive MP4 streaming.
+
+**Props:**
+
+- `src` (required): Video source URL
+- `title` (optional): Video title
+- `width` (optional): Player width (default: '85%')
+
+### **HLSVideoStream Component**
+
+An advanced video player with HLS support using Vidstack.
+
+**Props:**
+
+- `src` (required): HLS manifest URL (.m3u8)
+- `title` (optional): Video title
+- `thumbnails` (optional): VTT thumbnails URL
+- `sectionTitle` (optional): Section heading
+
+---
+
+## 📜 **Available Scripts**
+
+| Command                | Description                          |
+| ---------------------- | ------------------------------------ |
+| `npm run dev`          | Start development server (port 3000) |
+| `npm run build`        | Build for production                 |
+| `npm run preview`      | Preview production build             |
+| `npm run lint`         | Check code quality                   |
+| `npm run lint:fix`     | Auto-fix linting issues              |
+| `npm run prettier`     | Check code formatting                |
+| `npm run prettier:fix` | Auto-fix code formatting             |
+
+---
+
+## 🔧 **Configuration**
+
+### **Vite Configuration** (`vite.config.js`)
+
+```javascript
+export default defineConfig({
+  plugins: [react()],
+  css: {
+    devSourcemap: true
+  },
+  server: {
+    port: 3000
+  }
+});
+```
+
+### **Environment Variables**
+
+| Variable                   | Description            | Example                                    |
+| -------------------------- | ---------------------- | ------------------------------------------ |
+| `VITE_GOOGLE_CLIENT_ID`    | Google OAuth Client ID | `123456789-abc.apps.googleusercontent.com` |
+| `VITE_GOOGLE_REDIRECT_URI` | OAuth redirect URI     | `http://localhost:3000/login/oauth`        |
+
+> ⚠️ **Important:** All environment variables in Vite must be prefixed with `VITE_` to be accessible in the browser.
+
+---
+
+## 🚧 **Roadmap & Future Features**
+
+- [ ] Tweet/post creation interface
+- [ ] User profile pages
+- [ ] Follow/unfollow UI
+- [ ] Real-time notifications
+- [ ] Tweet feed with pagination
+- [ ] Image upload interface
+- [ ] Dark mode toggle
+- [ ] Responsive mobile design
+- [ ] Advanced video controls
+- [ ] User search functionality
+
+---
+
+## 🤝 **Contributing**
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📝 **License**
+
+This project is licensed under the MIT License.
+
+---
+
+## 🔗 **Related Projects**
+
+- [🐦 Twitter Clone Backend API](https://github.com/Kenn0679/Twitter) - The backend API this client connects to
+
+---
+
+## 💡 **Troubleshooting**
+
+### **Common Issues**
+
+#### **OAuth redirect not working**
+
+- Ensure `VITE_GOOGLE_REDIRECT_URI` matches exactly with Google Cloud Console settings
+- Check that the backend API is running on `localhost:5000`
+- Verify CORS settings on the backend
+
+#### **Video not loading**
+
+- Ensure the backend API is running and serving videos
+- Check that video paths are correct in `Home.jsx`
+- Verify CORS settings allow video streaming
+
+#### **Tokens not persisting**
+
+- Check browser localStorage is enabled
+- Clear localStorage and try logging in again
+- Verify the backend is returning tokens correctly
+
+---
+
+## 📧 **Contact & Support**
+
+For issues, questions, or contributions:
+
+- 🐛 [Report a Bug](https://github.com/yourusername/twitter-client/issues)
+- 💬 [Ask a Question](https://github.com/yourusername/twitter-client/discussions)
+- 🔗 [Backend API Repository](https://github.com/Kenn0679/Twitter)
+
+---
+
+<div align="center">
+
+**Built with ❤️ using React & Vite**
+
+⭐ Star this repo if you find it helpful!
+
+</div>

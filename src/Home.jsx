@@ -2,6 +2,12 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import { Link } from 'react-router-dom';
+import VideoStream from './components/VideoStream';
+import HLSVideoStream from './components/HLSVideoStream';
+
+//static files served using express server at your server port
+const videoPath = 'http://localhost:5000/static/videos-stream/bry5qobzfkdtytskesoyxqvcl.mp4';
+const hlsVideoPath = 'http://localhost:5000/static/videos-hls/3W1ynbgMxG78yPxJ9oa98/master.m3u8';
 
 const getGoogleAuthURL = () => {
   const { VITE_GOOGLE_CLIENT_ID, VITE_GOOGLE_REDIRECT_URI } = import.meta.env;
@@ -43,9 +49,16 @@ export default function Home() {
           <img src={reactLogo} className='logo react' alt='React logo' />
         </span>
       </div>
-      <video controls width={'85%'}>
-        <source src='http://localhost:5000/static/videos-stream/ckzvks8491n1tc6ae27vqyfdq.mp4' type='video/mp4' />
-      </video>
+
+      <VideoStream src={videoPath} title='Progressive Video Streaming' width='85%' />
+
+      <HLSVideoStream
+        src={hlsVideoPath}
+        title='Sprite Fight'
+        sectionTitle='HLS Adaptive Streaming'
+        thumbnails='https://files.vidstack.io/sprite-fight/thumbnails.vtt'
+      />
+
       <h1>Google Oauth 2.0</h1>
 
       <div className='read-the-docs'>

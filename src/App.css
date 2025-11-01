@@ -40,3 +40,59 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Video Streaming Demo Styles */
+.video-demo-section {
+  margin: 3rem auto;
+  padding: 2rem;
+  border: 2px solid #646cff;
+  border-radius: 12px;
+  background: rgba(100, 108, 255, 0.05);
+  max-width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-demo-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(100, 108, 255, 0.2);
+}
+
+.video-demo-section h2 {
+  color: #646cff;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #646cff;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.video-demo-section video {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.video-player-wrapper {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.demo-badge {
+  display: inline-block;
+  background: #646cff;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+}
+
+.hls-badge {
+  background: #61dafb;
+}
