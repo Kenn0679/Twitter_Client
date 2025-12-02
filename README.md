@@ -6,7 +6,8 @@
 [![Vite](https://img.shields.io/badge/Vite-7.1.7-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black&style=flat-square)](https://www.javascript.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
-**A modern React frontend client for Twitter Clone API**
+
+**A modern React frontend client for the Twitter Clone API**
 
 [🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [🔗 Backend API](https://github.com/Kenn0679/Twitter) • [💻 Tech Stack](#-tech-stack)
 
@@ -28,29 +29,11 @@ This is a **frontend demo client** for the [Twitter Clone API](https://github.co
 
 ---
 
-## 🛠️ **Tech Stack**
-
-### **Core Technologies**
-
-- ⚛️ **React 19.1.1** - Modern UI library
-- ⚡ **Vite 7.1.7** - Fast build tool and dev server
-- 🛣️ **React Router DOM 7.9.4** - Client-side routing
-- 🎬 **@vidstack/react** - Advanced video player with HLS support
-- 🔔 **react-hot-toast** - Beautiful toast notifications
-
-### **Development Tools**
-
-- 🔍 **ESLint 9.36.0** - Code linting
-- 💅 **Prettier** - Code formatting
-- 🔄 **SWC** - Fast compilation
-
----
-
 ## 🚀 **Quick Start**
 
 ### **Prerequisites**
 
-Make sure you have the following installed:
+Ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/) (v18+ recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
@@ -74,19 +57,30 @@ npm install
 Create a `.env` file in the root directory:
 
 ```bash
-# Copy the example file (if available)
+# Copy the example file
 cp .env.example .env
 ```
 
-Add the following environment variables:
+Update the `.env` file with your credentials:
 
 ```env
 # Google OAuth Configuration
 VITE_GOOGLE_CLIENT_ID=your-google-client-id-here
 VITE_GOOGLE_REDIRECT_URI=http://localhost:3000/login/oauth
+
+# AWS Configuration
+VITE_AWS_ACCESS_KEY_ID=your-aws-access-key-id
+VITE_AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
+VITE_AWS_REGION=ap-southeast-1
+VITE_SES_FROM_ADDRESS=your-email@example.com
+VITE_BUCKET_NAME=your-s3-bucket-name
+
+# API Endpoints
+VITE_API_URL=http://localhost:5000
+VITE_API_URL_WS=ws://localhost:5000
 ```
 
-> 💡 **Note:** You need to set up Google OAuth credentials in the [Google Cloud Console](https://console.cloud.google.com/). The redirect URI must match exactly: `http://localhost:3000/login/oauth`
+> 💡 **Note:** Ensure the Google OAuth redirect URI matches exactly with the settings in the [Google Cloud Console](https://console.cloud.google.com/).
 
 #### 3️⃣ **Start Development Server**
 
@@ -169,10 +163,27 @@ twitter-client/
 ```jsx
 <HLSVideoStream
   src='http://localhost:5000/static/videos-hls/playlist/master.m3u8'
-  title='HLS Video'
   thumbnails='https://example.com/thumbnails.vtt'
 />
 ```
+
+---
+
+## 🛠️ **Tech Stack**
+
+### **Core Technologies**
+
+- ⚛️ **React 19.1.1** - Modern UI library
+- ⚡ **Vite 7.1.7** - Fast build tool and dev server
+- 🛣️ **React Router DOM 7.9.4** - Client-side routing
+- 🎬 **@vidstack/react** - Advanced video player with HLS support
+- 🔔 **react-hot-toast** - Beautiful toast notifications
+
+### **Development Tools**
+
+- 🔍 **ESLint 9.36.0** - Code linting
+- 💅 **Prettier** - Code formatting
+- 🔄 **SWC** - Fast compilation
 
 ---
 
@@ -249,110 +260,6 @@ An advanced video player with HLS support using Vidstack.
 
 ---
 
-## 🔧 **Configuration**
-
-### **Vite Configuration** (`vite.config.js`)
-
-```javascript
-export default defineConfig({
-  plugins: [react()],
-  css: {
-    devSourcemap: true
-  },
-  server: {
-    port: 3000
-  }
-});
-```
-
-### **Environment Variables**
-
-| Variable                   | Description            | Example                                    |
-| -------------------------- | ---------------------- | ------------------------------------------ |
-| `VITE_GOOGLE_CLIENT_ID`    | Google OAuth Client ID | `123456789-abc.apps.googleusercontent.com` |
-| `VITE_GOOGLE_REDIRECT_URI` | OAuth redirect URI     | `http://localhost:3000/login/oauth`        |
-
-> ⚠️ **Important:** All environment variables in Vite must be prefixed with `VITE_` to be accessible in the browser.
-
----
-
-## 🚧 **Roadmap & Future Features**
-
-- [ ] Tweet/post creation interface
-- [ ] User profile pages
-- [ ] Follow/unfollow UI
-- [ ] Real-time notifications
-- [ ] Tweet feed with pagination
-- [ ] Image upload interface
-- [ ] Dark mode toggle
-- [ ] Responsive mobile design
-- [ ] Advanced video controls
-- [ ] User search functionality
-
----
-
-## 🤝 **Contributing**
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
 ## 📝 **License**
 
 This project is licensed under the MIT License.
-
----
-
-## 🔗 **Related Projects**
-
-- [🐦 Twitter Clone Backend API](https://github.com/Kenn0679/Twitter) - The backend API this client connects to
-
----
-
-## 💡 **Troubleshooting**
-
-### **Common Issues**
-
-#### **OAuth redirect not working**
-
-- Ensure `VITE_GOOGLE_REDIRECT_URI` matches exactly with Google Cloud Console settings
-- Check that the backend API is running on `localhost:5000`
-- Verify CORS settings on the backend
-
-#### **Video not loading**
-
-- Ensure the backend API is running and serving videos
-- Check that video paths are correct in `Home.jsx`
-- Verify CORS settings allow video streaming
-
-#### **Tokens not persisting**
-
-- Check browser localStorage is enabled
-- Clear localStorage and try logging in again
-- Verify the backend is returning tokens correctly
-
----
-
-## 📧 **Contact & Support**
-
-For issues, questions, or contributions:
-
-- 🐛 [Report a Bug](https://github.com/yourusername/twitter-client/issues)
-- 💬 [Ask a Question](https://github.com/yourusername/twitter-client/discussions)
-- 🔗 [Backend API Repository](https://github.com/Kenn0679/Twitter)
-
----
-
-<div align="center">
-
-**Built with ❤️ using React & Vite**
-
-⭐ Star this repo if you find it helpful!
-
-</div>
