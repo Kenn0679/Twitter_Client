@@ -6,8 +6,8 @@ import VideoStream from './components/VideoStream';
 import HLSVideoStream from './components/HLSVideoStream';
 
 //static files served using express server at your server port
-const videoPath = 'http://localhost:5000/static/videos-stream/bry5qobzfkdtytskesoyxqvcl.mp4';
-const hlsVideoPath = 'http://localhost:5000/static/videos-hls/3W1ynbgMxG78yPxJ9oa98/master.m3u8';
+const videoPath = 'http://localhost:5000/static/videos-stream/ylFNxKJq6vW_wqAQXtbZE.mp4';
+const hlsVideoPath = 'http://localhost:5000/static/videos-hls/Ib9JcqakV6M5B7Ww1vmFx/master.m3u8';
 
 const getGoogleAuthURL = () => {
   const { VITE_GOOGLE_CLIENT_ID, VITE_GOOGLE_REDIRECT_URI } = import.meta.env;
@@ -41,10 +41,8 @@ export default function Home() {
     <>
       <div>
         <span>
-          {' '}
           <img src={viteLogo} className='logo' alt='Vite logo' />
         </span>
-
         <span>
           <img src={reactLogo} className='logo react' alt='React logo' />
         </span>
@@ -64,13 +62,48 @@ export default function Home() {
       <div className='read-the-docs'>
         {isAuthenticated ? (
           <div>
-            <span style={{ display: 'block' }}>You are logged in successfully!</span>
-            <button onClick={logout}>Logout</button>
+            <span style={{ display: 'block' }}>
+              {(() => {
+                const userStr = localStorage.getItem('user');
+                if (userStr) {
+                  try {
+                    const user = JSON.parse(userStr);
+                    return (
+                      <>
+                        <div style={{ fontSize: '20px' }}>
+                          You are logged in as{' '}
+                          <span className='verify-btn-primary' style={{ padding: '2px 8px', borderRadius: 6 }}>
+                            {user.name}
+                          </span>{' '}
+                          with email{' '}
+                          <span className='verify-btn-primary' style={{ padding: '2px 8px', borderRadius: 6 }}>
+                            {user.email}
+                          </span>{' '}
+                          successfully!
+                        </div>
+                      </>
+                    );
+                  } catch {
+                    return 'You have logged in successfully!';
+                  }
+                }
+                return 'You have logged in successfully!';
+              })()}
+            </span>
+            <button className='verify-btn-primary' onClick={logout}>
+              Logout
+            </button>
           </div>
         ) : (
           <div>
             <span style={{ display: 'block' }}>Please log in to continue.</span>
-            <Link to={googleOAuthURL}>Login with Google</Link>
+            <button
+              className='verify-btn-primary'
+              style={{ marginTop: 12 }}
+              onClick={() => (window.location.href = googleOAuthURL)}
+            >
+              Login with Google
+            </button>
           </div>
         )}
       </div>
