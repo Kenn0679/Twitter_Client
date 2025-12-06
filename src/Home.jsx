@@ -7,7 +7,7 @@ import HLSVideoStream from './components/HLSVideoStream';
 
 //static files served using express server at your server port
 const videoPath = 'http://localhost:5000/static/videos-stream/ylFNxKJq6vW_wqAQXtbZE.mp4';
-const hlsVideoPath = 'http://localhost:5000/static/videos-hls/Ib9JcqakV6M5B7Ww1vmFx/master.m3u8';
+const hlsVideoPath = 'http://localhost:5000/static/videos-hls/PJz400F07IuCclBcbEfrQ/master.m3u8';
 
 const getGoogleAuthURL = () => {
   const { VITE_GOOGLE_CLIENT_ID, VITE_GOOGLE_REDIRECT_URI } = import.meta.env;
